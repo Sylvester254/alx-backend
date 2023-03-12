@@ -1,0 +1,45 @@
+from collections import defaultdict
+from datetime import datetime
+from base_caching import BaseCaching
+
+
+class LFUCache(BaseCaching):
+    def __init__(self):
+        super().__init__()
+        self.freq_dict = defaultdict(list)
+        self.min_freq = 0
+
+    def put(self, key, item):
+        if key is None or item is None:
+            return
+
+        if key in self.cache_data:
+            self.cache_data[key] = item
+            self.freq_dict[key][-1] = datetime.now()
+        else:
+            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                min_freq_list = self.freq_dict[self.min_freq]
+                key_to_delete = min_freq_list.pop(0)
+                del self.cache_data[key_to_delete]
+                if not min_freq_list:
+                    del self.freq_dict[self.min_freq]
+                self.min_freq = 1
+
+            self.cache_data[key] = item
+            self.freq_dict[key].append(datetime.now())
+            self.min_freq = 1
+
+    def get(self, key):
+        if key is None or key not in self.cache_data:
+            return None
+
+        value = self.cache_data[key]
+        freq_list = self.freq_dict[key]
+        freq_list[-1] = datetime.now()
+        freq = len(freq_list)
+
+        self.freq_dict[freq].append(key)
+        if self.min_freq == freq - 1 and not self.freq_dict[self.min_freq]:
+            self.min_freq += 1
+
+        return value
