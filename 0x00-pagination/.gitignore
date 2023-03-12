@@ -1,0 +1,25 @@
+    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """Return the specified page of the dataset, paginated according to the given page size.
+
+        If the input arguments are out of range for the dataset, an empty list is returned.
+
+        Args:
+            page (int, optional): The 1-indexed page number to return. Defaults to 1.
+            page_size (int, optional): The number of rows per page. Defaults to 10.
+
+        Returns:
+            List[List]: The list of rows corresponding to the specified page of the dataset.
+        """
+        if not isinstance(page, int) or not isinstance(page_size, int):
+            raise ValueError("Both page and page_size must be integers.")
+        if page <= 0 or page_size <= 0:
+            raise ValueError("Both page and page_size must be positive integers.")
+
+        start_index, end_index = index_range(page, page_size)
+        dataset_size = len(self.dataset())
+        if start_index >= dataset_size:
+            return []
+        elif end_index >= dataset_size:
+            end_index = dataset_size
+
+        return self.dataset()[start_index:end_index]
