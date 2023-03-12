@@ -54,7 +54,7 @@ class Server:
                 of rows per page. Defaults to 10.
 
         Returns:
-            List[List]: The list of rows corresponding 
+            List[List]: The list of rows corresponding
                 to the specified page of the dataset.
         """
         assert isinstance(page, int) and page > 0
@@ -90,9 +90,10 @@ class Server:
         assert isinstance(page_size, int) and page_size > 0
 
         data = self.get_page(page, page_size)
-        page_size = len(data)
         page = page
-        total_pages = math.ceil(len(self.dataset()) / page_size) if page_size != 0 else 0
+        total_pages = math.ceil(len
+                                (self.dataset()) / page_size
+                                ) if page_size != 0 else 0
 
         if page < total_pages:
             next_page = page + 1
@@ -105,7 +106,7 @@ class Server:
             prev_page = None
 
         return {
-            "page_size": page_size,
+            "page_size": len(data),
             "page": page,
             "data": data,
             "next_page": next_page,

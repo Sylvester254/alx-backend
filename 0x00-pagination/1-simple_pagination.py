@@ -5,8 +5,7 @@ from typing import List
 """
 - Helper function named index_range that takes two
 integer arguments page and page_size.
-- Server class
-- method get_page that takes two integer 
+- method get_page that takes two integer
 arguments page with default value 1 and
 page_size with default value 10.
 """
@@ -24,6 +23,11 @@ def index_range(page: int, page_size: int) -> tuple:
     end_index = start_index + page_size
 
     return start_index, end_index
+
+
+"""
+Server class
+"""
 
 
 class Server:
@@ -59,7 +63,7 @@ class Server:
                 of rows per page. Defaults to 10.
 
         Returns:
-            List[List]: The list of rows corresponding 
+            List[List]: The list of rows corresponding
                 to the specified page of the dataset.
         """
         assert isinstance(page, int) and page > 0
