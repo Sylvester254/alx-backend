@@ -2,11 +2,20 @@
 import csv
 import math
 from typing import List
+"""
+- Helper function named index_range that takes two
+integer arguments page and page_size.
+- Server class
+- method get_page that takes two integer 
+arguments page with default value 1 and
+page_size with default value 10.
+"""
 
 
 def index_range(page: int, page_size: int) -> tuple:
     """
-    Return a tuple of start and end indexes for the given page number and page size.
+    Return a tuple of start and end indexes for
+        the given page number and page size.
     """
     if page <= 0 or page_size <= 0:
         raise ValueError("Both page and page_size must be positive integers.")
@@ -37,16 +46,21 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """Return the specified page of the dataset, paginated according to the given page size.
+        """Return the specified page of the dataset,
+            paginated according to the given page size.
 
-        If the input arguments are out of range for the dataset, an empty list is returned.
+        If the input arguments are out of range
+            for the dataset, an empty list is returned.
 
         Args:
-            page (int, optional): The 1-indexed page number to return. Defaults to 1.
-            page_size (int, optional): The number of rows per page. Defaults to 10.
+            page (int, optional): The 1-indexed
+                page number to return. Defaults to 1.
+            page_size (int, optional): The number
+                of rows per page. Defaults to 10.
 
         Returns:
-            List[List]: The list of rows corresponding to the specified page of the dataset.
+            List[List]: The list of rows corresponding 
+                to the specified page of the dataset.
         """
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
