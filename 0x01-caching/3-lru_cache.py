@@ -24,7 +24,8 @@ class LRUCache(BaseCaching):
         """
         if key is None or item is None:
             return
-        # If the key already exists, update the value and move it to the end of the OrderedDict
+        # If the key already exists, update the
+        # value and move it to the end of the OrderedDict
         if key in self.cache_data:
             self.cache_data.pop(key)
         # If the cache is full, remove the first (least recently used) item

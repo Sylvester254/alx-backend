@@ -8,7 +8,8 @@ class LFUCache(BaseCaching):
     """ LFUCache defines:
       - constants of your caching system
       - where your data are stored (in a dictionary)
-      - functions that put and get values to/from cache according to LFU algorithm
+      - functions that put and get values to/from
+        cache according to LFU algorithm
     """
     def __init__(self):
         """ Initiliaze
@@ -33,7 +34,8 @@ class LFUCache(BaseCaching):
         """ Discard the least frequency used item
         """
         min_frequency = min(self.frequency.values())
-        lfu_items = [k for k, v in self.frequency.items() if v == min_frequency]
+        lfu_items = [
+            k for k, v in self.frequency.items() if v == min_frequency]
         if len(lfu_items) == 1:
             key = lfu_items[0]
         else:
@@ -48,7 +50,8 @@ class LFUCache(BaseCaching):
         """
         if key is None or item is None:
             return
-        if len(self.cache_data) >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
+        if len(self.cache_data) >= BaseCaching.MAX_ITEMS \
+                and key not in self.cache_data:
             self.evict()
         self.cache_data[key] = item
         self.update_lfu_keys(key)
