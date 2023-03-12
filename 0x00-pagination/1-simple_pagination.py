@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-import csv
-import math
-from typing import List
 """
 - Helper function named index_range that takes two
 integer arguments page and page_size.
@@ -9,6 +6,10 @@ integer arguments page and page_size.
 arguments page with default value 1 and
 page_size with default value 10.
 """
+
+import csv
+import math
+from typing import List
 
 
 def index_range(page: int, page_size: int) -> tuple:
